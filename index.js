@@ -1,14 +1,21 @@
 const http = require("http");
+const https = require("https");
+const fs = require("fs");
 const url = require("url");
 const request = require("request");
 const querystring = require("querystring");
 
-let server = http.createServer((req, res) => {
+// https
+const httpsOption = {
+    key: fs.readFileSync("./https/xxxxx.key"),
+    cert: fs.readFileSync("./https/xxxxx.pem")
+}
+
+function server(req, res) {
     let pathname = url.parse(req.url, true);
     let arg = url.parse(req.url).query;
     let params = querystring.parse(arg);
     let longurl = params.url;
-    console.log(params);
     switch (pathname.pathname) {
         case '/tinyurl/urlcn':
             urlcn(longurl).then(function (req) {
@@ -53,14 +60,19 @@ let server = http.createServer((req, res) => {
             }
             break;
     }
-});
+    
+}
 
+
+
+http.createServer(server).listen(3000);
+https.createServer(httpsOption, server).listen(443);
 function urlcn(url) {
     //原api http://sa.sogou.com/gettiny?url=
     return new Promise((resolve, reject) => {
 
         let option = {
-            url: "http://sa.sogou.com/gettiny?url=" + url,
+            url: "https://sa.sogou.com/gettiny?url=" + url,
             method: "GET",
             headers: {
                 "content-type": "text/plain",
@@ -98,4 +110,5 @@ function tcn(url) {
 
 };
 
-server.listen(3000);
+
+
