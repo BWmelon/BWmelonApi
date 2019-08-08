@@ -1,7 +1,11 @@
 const express = require("express");
 const cors = require('cors');
 const app = express();
-const path = require('path')
+// console.log(app);
+
+const path = require('path');
+const fs = require('fs');
+const https = require('https');
 app.use(cors());
 app.use("/", express.static(path.join(__dirname, 'public')))
 
@@ -26,9 +30,14 @@ app.use("/api/icp", icp);
 app.use("/api/onenote", onenote);
 app.use("/api/bing", bing);
 
- 
+const httpsOption = {
+    cert: fs.readFileSync("./certificate/xxxxx.pem"),
+    key: fs.readFileSync("./certificate/xxxxx.key")
+}
 
 const port = 3000;
 app.listen(port, () => {
     console.log(`Sever running on port ${port}`);
 });
+
+https.createServer(httpsOption, app).listen(444);
