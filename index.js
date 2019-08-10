@@ -40,9 +40,10 @@ app.listen(port, () => {
 
 
 // https配置
+const httpsOption = {
+    cert: fs.readFileSync("./certificate/xxxxx.pem"),
+    key: fs.readFileSync("./certificate/xxxxx.key")
+}
 
-// const httpsOption = {
-//     cert: fs.readFileSync("./certificate/xxxxx.pem"),
-//     key: fs.readFileSync("./certificate/xxxxx.key")
-// }
-// https.createServer(httpsOption, app).listen(444);
+
+https.createServer(httpsOption, app).listen(444);
