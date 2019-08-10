@@ -18,6 +18,7 @@
     "express": "^4.17.1",
     "qr-decode": "^0.0.3",
     "qr-image": "^3.2.0",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "simple-netease-cloud-music": "^0.4.4"
   }
 }

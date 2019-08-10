@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="api, 接口, 网易云音乐, 解析" />
+    <meta name="description" content="大西瓜API 一个简易、快速、高效的API聚合平台" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="bookmark" href="favicon.ico" />
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>网易云音乐api</title>
+</head>
+
+<body>
+    <div id="particles-js" class="diy-bg">
+        <canvas class="particles-js-canvas-el" width="1080" height="1920" style="width: 100%; height: 100%;"></canvas>
+    </div>
+    <!-- header开始 -->
+    <div class="">
+        <nav class="navbar navbar-inverse mainColor">
+            <div class="container-fluid container">
+                <div class="navbar-header header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navBar"
+                        aria-expanded="false">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a data-pjax class="navbar-brand" href="index.html">大西瓜API</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navBar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="https://www.bwmelon.com/">博客</a></li>
+                        <li><a href="https://github.com/BWmelon/bwmelonApi">Github</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">Links <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="https://qr.no0a.cn/">三合一收款码</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="https://jq.qq.com/?_wv=1027&amp;k=58OjqS7">有问题点我</a></li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- header结束 -->
+
+    <div id="pjax-content">
+        <div class="container">
+            <!-- pjax-content开始 -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">接口说明</h3>
+                </div>
+                <div class="panel-body">
+                    网易云音乐搜索、歌曲url获取、歌曲信息获取、歌词获取、歌单列表获取
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">请求方式</h3>
+                </div>
+                <div class="panel-body">
+                    GET
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">请求地址</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>搜索：https://api.no0a.cn/api/cloudmusic/search/key</pre>
+                </div>
+                <div class="panel-body">
+                    <pre>url解析：https://api.no0a.cn/api/cloudmusic/url/id</pre>
+                </div>
+                <div class="panel-body">
+                    <pre>信息：https://api.no0a.cn/api/cloudmusic/info/id</pre>
+                </div>
+                <div class="panel-body">
+                    <pre>歌词：https://api.no0a.cn/api/cloudmusic/lyric/id</pre>
+                </div>
+                <div class="panel-body">
+                    <pre>歌单：https://api.no0a.cn/api/cloudmusic/playlist/id</pre>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">参数说明</div>
+                <table class="table">
+                    <tr>
+                        <th>参数</th>
+                        <th>说明</th>
+                    </tr>
+                    <tr>
+                        <td>key</td>
+                        <td>歌曲搜索关键词</td>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>歌曲id或者歌单id</td>
+                    </tr>
+                    <tr>
+                        <td>status</td>
+                        <td>状态码</td>
+                    </tr>
+                    <tr>
+                        <td>name</td>
+                        <td>歌曲名或作者名</td>
+                    </tr>
+                    <tr>
+                        <td>id</td>
+                        <td>歌曲id</td>
+                    </tr>
+                    <tr>
+                        <td>artist</td>
+                        <td>作者名列表</td>
+                    </tr>
+                    <tr>
+                        <td>musicurl</td>
+                        <td>歌曲解析地址，格式为mp3</td>
+                    </tr>
+                    <tr>
+                        <td>musiclyric</td>
+                        <td>歌词</td>
+                    </tr>
+                    <tr>
+                        <td>musicinfo</td>
+                        <td>歌曲信息</td>
+                    </tr>
+                    <tr>
+                        <td>msg</td>
+                        <td>返回的错误信息</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">请求示例：搜索(需先进行url编码)</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>https://api.no0a.cn/api/cloudmusic/search/偏爱</pre>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">返回示例</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>
+{
+    "status": 1,
+    "results": [
+        {
+            "name": "偏爱",
+            "id": 86369,
+            "artist": [
+                {
+                    "name": "张芸京"
+                }
+            ]
+        },
+        {
+            "name": "偏爱",
+            "id": 328076,
+            "artist": [
+                {
+                    "name": "张芸京"
+                }
+            ]
+        },
+        {
+            "name": "此生不换",
+            "id": 86363,
+            "artist": [
+                {
+                    "name": "青鸟飞鱼"
+                }
+            ]
+        }
+    ]
+}
+                    </pre>
+
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">请求示例：url解析</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>https://api.no0a.cn/api/cloudmusic/url/86369</pre>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">返回示例</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>
+{
+    "status": 1,
+    "musicurl": "http://m8.music.126.net/20190810162950/cb941dff97550a297f9888cb96251ec0/ymusic/2f43/79c5/bd3c/7fe89e927098b086e99223a996189cba.mp3"
+}
+                    </pre>
+
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">请求示例：信息</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>https://api.no0a.cn/api/cloudmusic/info/86369</pre>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">返回示例</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>
+{
+    "status": 1,
+    "musicinfo": {
+        "name": "偏爱",
+        "artist": [
+            {
+                "name": "张芸京"
+            }
+        ]
+    }
+}
+                    </pre>
+
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">请求示例：歌词</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>https://api.no0a.cn/api/cloudmusic/lyric/86369</pre>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">返回示例</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>
+{
+    "status": 1,
+    "musiclyric": "[by:Kyu9n]\n[00:00.000] 作曲 : 陈伟\n[00:01.000] 作词 : 葛大为\n[00:15.50]把昨天都作废\n[00:18.91]现在你在我眼前\n[00:22.69]我想爱 请给我机会\n[00:29.19]如果我错了也承担\n[00:33.07]认定你就是答案\n[00:37.76]我不怕谁嘲笑我极端\n[00:42.07]\n[00:42.92]相信自己的直觉\n[00:46.78]顽固的人不喊累\n[00:50.27]爱上你 我不撤退\n[00:55.19]\n[00:55.70]我说过 我不闪躲\n[00:59.12]我非要这么做\n[01:01.83]讲不听 也偏要爱\n[01:04.27]更努力爱 让你明白\n[01:09.37]没有别条路能走\n[01:12.58]你决定要不要陪我\n[01:15.50]讲不听 偏爱\n[01:17.22]靠我感觉爱\n[01:18.94]等你的依赖\n[01:21.90]对你偏爱\n[01:29.18]痛也很愉快\n[01:36.06]\n[01:37.82]把昨天都作废\n[01:41.20]现在你在我眼前\n[01:44.91]我想爱 请给我机会\n[01:51.49]如果我错了也承担\n[01:55.40]认定你就是答案\n[02:00.14]我不怕谁嘲笑我极端\n[02:04.37]\n[02:05.18]相信自己的直觉\n[02:09.05]顽固的人不喊累\n[02:12.54]爱上你 我不撤退\n[02:17.59]\n[02:18.01]我说过 我不闪躲\n[02:21.44]我非要这么做\n[02:24.09]讲不听 也偏要爱\n[02:26.55]更努力爱 让你明白\n[02:31.79]没有别条路能走\n[02:34.77]你决定要不要陪我\n[02:37.80]讲不听 偏爱\n[02:39.54]靠我感觉爱\n[02:41.20]等你的依赖\n[02:44.04]\n[02:44.22]不后悔 有把握\n[02:47.12]我不闪躲 我非要这么做\n[02:51.46]讲不听 也偏要爱\n[02:53.92]更努力爱 让你明白\n[02:59.16]没有别条路能走\n[03:02.17]你决定要不要陪我\n[03:05.22]讲不听 偏爱\n[03:06.95]靠我感觉爱\n[03:08.74]等你的依赖\n[03:11.64]对你偏爱 爱\n[03:18.91]痛也很愉快\n[03:26.57]\n"
+}
+                    </pre>
+
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">请求示例：歌单</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>https://api.no0a.cn/api/cloudmusic/playlist/2796626278</pre>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">返回示例</h3>
+                </div>
+                <div class="panel-body">
+                    <pre>
+{
+    "status": 1,
+    "results": [
+        {
+            "name": "カノン",
+            "id": 4894309,
+            "artist": [
+                {
+                    "name": "DJ Okawari"
+                }
+            ]
+        },
+        {
+            "name": "Adagio for Summer Wind",
+            "id": 760037,
+            "artist": [
+                {
+                    "name": "清水準一"
+                }
+            ]
+        },
+        {
+            "name": "やわらかな光",
+            "id": 28287132,
+            "artist": [
+                {
+                    "name": "やまだ豊"
+                }
+            ]
+        },
+        {
+            "name": "一弯明月",
+            "id": 362446,
+            "artist": [
+                {
+                    "name": "陈嘉玲"
+                }
+            ]
+        }
+    ]
+}
+                    </pre>
+
+                </div>
+            </div>
+            <!-- pjax-content结束 -->
+        </div>
+    </div>
+
+    <!-- footer开始 -->
+    <footer class="footer navbar-bottom">
+        <div class="">
+            <p class="text-center footer-text">CopyRight © 2019 |
+                <a href="https://www.bwmelon.com" target="_blank" class="link">大西瓜博客 </a>
+                <a href="https://console.upyun.com/register/?invite=HJgXwr0lV"><img
+                        src="https://imgs.bwmelon.com/20190506153023.png" alt="又拍云免费CDN" width="60px"></a>
+                <a href="http://beian.miit.gov.cn/" target="_blank"> 苏ICP备18069696号</a>
+            </p>
+
+        </div>
+    </footer>
+    <!-- footer结束 -->
+    <!-- pjax加载动画 -->
+    <div class="loading" style="display: none;">
+        <div id="loader"></div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
+    <script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+    <script src="./js/index.js"></script>
+
+</body>
+
+</html>
