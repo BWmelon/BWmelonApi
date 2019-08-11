@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const request = require("request");
+const Core = require("../../core/function");
+const core = new Core();
 
 
 router.get("/urlcn", (req, res) => {
@@ -24,6 +26,7 @@ router.get("/urlcn", (req, res) => {
                 });
             })
     }
+    core.statAdd("tinyurl");
 });
 
 router.get("/tcn", (req, res) => {
@@ -47,6 +50,7 @@ router.get("/tcn", (req, res) => {
                 });
             })
     }
+    core.statAdd("tinyurl");
 });
 
 function urlcn(url) {

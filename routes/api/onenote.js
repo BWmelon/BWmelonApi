@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const readline = require('readline');
 const fs = require("fs");
+const Core = require("../../core/function");
+const core = new Core();
 
 router.get("/query", (req, res) => {
     onenote(process.cwd() + '/static/files/onenote.txt')
@@ -17,7 +19,7 @@ router.get("/query", (req, res) => {
                 msg: "一言获取失败"
             })
         })
-    
+    core.statAdd("onenote");
 });
 
 function onenote(filepath) {

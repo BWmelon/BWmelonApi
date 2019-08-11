@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const request = require("request");
+const Core = require("../../core/function");
+const core = new Core();
 
 router.get("/:qq", (req, res) => {
     if (!req.params.qq) {
@@ -23,6 +25,7 @@ router.get("/:qq", (req, res) => {
                 })
             })
     }
+    core.statAdd("qqinfo");
 });
 
 function qqinfo(qq) {

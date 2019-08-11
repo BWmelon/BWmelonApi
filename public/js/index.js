@@ -125,5 +125,46 @@ $(function () {
     });
     $(document).on('pjax:complete', function () {
         $(".loading").css("display", "none");
+        $.ajax({
+            url: "/api/statistic",
+            dataType: "JSON",
+            success: function (e) {
+                $("#tinyurl").text(e.tinyurl);
+                $("#longurl").text(e.longurl);
+                $("#qrcode").text(e.qrcode);
+                $("#qrdecode").text(e.qrdecode);
+                $("#sitetitle").text(e.sitetitle);
+                $("#icp").text(e.icp);
+                $("#cloudmusic").text(e.cloudmusic);
+                $("#qqinfo").text(e.qqinfo);
+                $("#onenote").text(e.onenote);
+                $("#bing").text(e.bing);
+                $(".stat").countUp({
+                    time: 1000,
+                    delay: 20
+                })
+            }
+        })
     });
+    $.ajax({
+        url: "/api/statistic",
+        dataType:"JSON", 
+        success: function(e) {
+            $("#tinyurl").text(e.tinyurl);
+            $("#longurl").text(e.longurl);
+            $("#qrcode").text(e.qrcode);
+            $("#qrdecode").text(e.qrdecode);
+            $("#sitetitle").text(e.sitetitle);
+            $("#icp").text(e.icp);
+            $("#cloudmusic").text(e.cloudmusic);
+            $("#qqinfo").text(e.qqinfo);
+            $("#onenote").text(e.onenote);
+            $("#bing").text(e.bing);
+            $(".stat").countUp({
+                time: 1000,
+                delay: 20
+            })
+        }
+    })
+    
 })

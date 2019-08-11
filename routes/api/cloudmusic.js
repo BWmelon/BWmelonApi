@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const NeteaseMusic = require("simple-netease-cloud-music");
 const nm = new NeteaseMusic()
+const Core = require("../../core/function");
+const core = new Core();
 
 
 // 歌曲搜索
@@ -50,6 +52,7 @@ router.get("/search/:key", (req, res) => {
             }
         })
     }
+    core.statAdd("cloudmusic");
 });
 
 
@@ -76,6 +79,7 @@ router.get("/url/:id", (req, res) => {
             }
         })
     }
+    core.statAdd("cloudmusic");
 });
 
 // 歌曲信息获取
@@ -111,6 +115,7 @@ router.get("/info/:id", (req, res) => {
             }
         })
     }
+    core.statAdd("cloudmusic");
 });
 
 
@@ -137,6 +142,7 @@ router.get("/lyric/:id", (req, res) => {
             }
         })
     }
+    core.statAdd("cloudmusic");
 });
 
 
@@ -181,6 +187,7 @@ router.get("/playlist/:id", (req, res) => {
             }   
         })
     }
+    core.statAdd("cloudmusic");
 });
 
 module.exports = router;

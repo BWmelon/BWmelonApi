@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const request = require("request");
+const Core = require("../../core/function");
+const core = new Core();
 
 router.get("/:day", (req, res) => {
     if (!req.params.day) {
@@ -13,7 +15,7 @@ router.get("/:day", (req, res) => {
             status: 4,
             msg: "壁纸日期应为0-8"
         })
-    } else {
+    } else {      
         bing(req.params.day)
             .then(req => {
                 res.json({
@@ -28,6 +30,7 @@ router.get("/:day", (req, res) => {
                 })
             })
     }
+    core.statAdd("bing");
 });
 
 function bing(day) {

@@ -16,6 +16,7 @@
     "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "mongoose": "^5.6.9",
     "qr-decode": "^0.0.3",
     "qr-image": "^3.2.0",
     "request": "^2.88.0",

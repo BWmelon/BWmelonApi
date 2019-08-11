@@ -63,52 +63,92 @@
         <div class="container" >
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./tinyurl.html" class="item-inner">
-                    短网址生成
+                    <span>短网址生成</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="tinyurl" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./longurl.html" class="item-inner">
-                        短网址还原
+                    <span>短网址还原</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="longurl" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./qrcode.html" class="item-inner">
-                        二维码生成
+                    <span>二维码生成</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="qrcode" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./qrdecode.html" class="item-inner">
-                        二维码识别解析    
+                    <span>二维码识别解析</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="qrdecode" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./sitetitle.html" class="item-inner">
-                        网站标题获取
+                    <span>网站标题获取</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="sitetitle" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./icp.html" class="item-inner">
-                        icp备案查询
+                    <span>icp备案查询</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="icp" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./cloudmusic.html" class="item-inner">
-                        网易云音乐合集
+                    <span>网易云音乐合集</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="cloudmusic" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./qqinfo.html" class="item-inner">
-                        qq信息获取
+                    <span>qq信息获取</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="qqinfo" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./onenote.html" class="item-inner">
-                        一言
+                    <span>一言</span>
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="onenote" class="stat">0</span>
+                    </span>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 item-outer">
                 <a data-pjax href="./bing.html" class="item-inner">         
-                        必应每日一图
+                    <span>必应每日一图</span>                    
+                    <span>
+                        <span class="glyphicon glyphicon-send" aria-hidden="true"></span>
+                        <span id="bing" class="stat">0</span>
+                    </span>
                 </a>
             </div>
         </div>
@@ -132,10 +172,12 @@
     <div class="loading" style="display: none;">
         <div id="loader"></div>
     </div>
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.bootcss.com/jquery.pjax/2.0.1/jquery.pjax.min.js"></script>
     <script src="https://cdn.bootcss.com/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.bootcss.com/waypoints/2.0.2/waypoints.min.js"></script>
+    <script src="./js/jquery.countup.min.js"></script>
     <script src="./js/index.js"></script>
 
 </body>

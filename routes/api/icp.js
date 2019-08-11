@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const request = require("request");
 const cheerio = require("cheerio");
+const Core = require("../../core/function");
+const core = new Core();
 
 router.get("/query", (req, res) => {
     if (!req.query.domain) {
@@ -24,6 +26,7 @@ router.get("/query", (req, res) => {
                 })
             })
     }
+    core.statAdd("icp");
 });
 
 function icp(domain) {

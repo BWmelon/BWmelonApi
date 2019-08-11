@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const request = require("request");
 const qrDecode = require('qr-decode/server');
+const Core = require("../../core/function");
+const core = new Core();
 
 router.get("/query", (req, res) => {
     if (!req.query.imgurl) {
@@ -24,7 +26,7 @@ router.get("/query", (req, res) => {
                 })
             })
     }
-    
+    core.statAdd("qrdecode");
 });
 
 function qrdecode(imgurl) {
