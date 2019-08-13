@@ -5,6 +5,7 @@ const Core = require("../../core/function");
 const core = new Core();
 
 router.get("/", (req, res) => {
+    console.log(req.headers);
     
     core.statQuery()
         .then(stat => {

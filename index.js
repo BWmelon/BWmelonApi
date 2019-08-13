@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const passport = require("passport");
 
 const path = require('path');
 const fs = require('fs');
@@ -13,6 +15,11 @@ app.use(cors());
 // 静态
 app.use("/", express.static(path.join(__dirname, 'public')));
 
+// 使用body-parser中间件
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
+
+
 // 连接数据库
 const db = require("./config/keys").mongoURI;
 mongoose.connect(db, {useNewUrlParser: true})
@@ -22,6 +29,19 @@ mongoose.connect(db, {useNewUrlParser: true})
         .catch((err) => {
             console.log(err);
         })
+
+// 数据库
+const statistic = require("./routes/api/statistic");
+app.use("/api/statistic", statistic);
+
+// passport初始化
+app.use(passport.initialize());
+
+require("./config/passport")(passport);
+
+
+const users = require("./routes/api/users");
+app.use("/api/users", users);
 
 const tinyurl = require("./routes/api/tinyurl");
 const longurl = require("./routes/api/longurl");
@@ -45,8 +65,7 @@ app.use("/api/onenote", onenote);
 app.use("/api/cloudmusic", cloudmusic);
 app.use("/api/bing", bing);
 
-const statistic = require("./routes/api/statistic");
-app.use("/api/statistic", statistic);
+
 
 
 const port = 3000;
