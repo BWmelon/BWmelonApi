@@ -1,32 +1,31 @@
 {
-  "name": "client",
-  "version": "0.1.0",
-  "private": true,
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "start": "npm run serve"
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "start": "node index.js",
+    "server": "nodemon index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.0",
-    "core-js": "^2.6.5",
-    "element-ui": "^2.11.1",
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.3",
-    "vuex": "^3.0.1"
-  },
-  "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.10.0",
-    "@vue/cli-service": "^3.10.0",
-    "vue-template-compiler": "^2.6.10"
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions"
-  ]
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
+    "concurrently": "^4.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jwt-decode": "^2.2.0",
+    "mongoose": "^5.6.9",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "qr-decode": "^0.0.3",
+    "qr-image": "^3.2.0",
+    "request": "^2.88.0",
+    "simple-netease-cloud-music": "^0.4.4"
+  }
 }

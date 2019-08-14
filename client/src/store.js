@@ -42,6 +42,10 @@ const actions = {
     commit
   }, user) => {
     commit(types.SET_USER, user)
+  },
+  clearCurrentState:({commit} )=> {
+    commit(types.SET_AUTHENTIATED, false);
+    commit(types.SET_USER, null)
   }
 }
 
