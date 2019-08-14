@@ -36,12 +36,14 @@ app.use("/api/statistic", statistic);
 
 // passport初始化
 app.use(passport.initialize());
-
 require("./config/passport")(passport);
 
 
 const users = require("./routes/api/users");
 app.use("/api/users", users);
+
+const blacklists = require("./routes/api/blacklists");
+app.use("/api/blacklists", blacklists);
 
 const tinyurl = require("./routes/api/tinyurl");
 const longurl = require("./routes/api/longurl");
