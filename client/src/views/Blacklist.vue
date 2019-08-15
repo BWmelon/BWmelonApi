@@ -46,8 +46,25 @@
             </template>
             </el-table-column>
         </el-table>
+        <!-- 分页 -->
+        <el-row>
+            <el-col :span="24">
+                <div class="pagination">
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page.sync="paginations.page_index"
+                        :page-sizes="paginations.page_sizes"
+                        :page-size="paginations.page_size"
+                        :layout="paginations.layout"
+                        :total="paginations.total">
+                    </el-pagination>
+                </div>
+                
+            </el-col>
+        </el-row>
     </div>
-    <Dialog :dialog="dialog"></Dialog>
+    <Dialog :dialog="dialog" :formData="formData" @update="getBlacklist"></Dialog>
 </div>
 </template>
 
@@ -57,9 +74,23 @@ export default {
     name: "blacklist",
     data() {
         return {
+            paginations: {
+                page_index: 1, // 当前位于哪页
+                total: 0, // 总数
+                page_size: 5, // 1页显示多少条
+                page_sizes: [5, 10, 15, 20], //每页显示多少条
+                layout: "total, sizes, prev, pager, next, jumper" // 翻页属性
+            },
             tableData: [],
+            allTableData: [],
+            formData: {
+                domain: '' ,
+                reason: ''
+            },
             dialog: {
-                show: false
+                show: false,
+                title: '',
+                option: 'edit'
             }
         };
     },
@@ -71,21 +102,74 @@ export default {
             this.$axios.get("/api/blacklists")
             .then(res => {
                 console.log(res);
-                this.tableData = res.data;
+                this.allTableData = res.data;
+                this.setPaginations();
             })
             .catch(err => {
                 console.log(err);
                 
             })
         },
+        setPaginations(){
+            this.paginations.total = this.allTableData.length;
+            this.paginations.page_index = 1;
+            this.paginations.page_size = 5;
+            this.tableData = this.allTableData.filter((item, index) => {
+                return index < this.paginations.page_size;
+            })
+        },
         handleEdit(index, row) {
+            this.dialog = {
+                show: true,
+                title: "修改域名黑名单",
+                option: 'edit'
+            }
 
+            this.formData = {
+                domain: row.domain,
+                reason: row.reason,
+                id: row._id
+            }
         },
         handleDelete(index, row){
-
+            this.$axios.delete(`/api/blacklists/delete/${row._id}`)
+                .then(res => {
+                    this.$message("删除成功");
+                    this.getBlacklist();
+                })
         },
         handleAdd(){
             this.dialog.show = true;
+            this.dialog = {
+                show: true,
+                title: "添加域名黑名单",
+                option: 'add'
+            }
+
+            this.formData = {
+                domain: "",
+                reason: "",
+                id: ""
+            }
+        },
+        handleCurrentChange(page) {
+            // 当前页
+            let sortnum = this.paginations.page_size * (page - 1);
+            let table = this.allTableData.filter((item, index) => {
+                return index >= sortnum;
+            });
+            // 设置默认分页数据
+            this.tableData = table.filter((item, index) => {
+                return index < this.paginations.page_size;
+            });
+        },
+        handleSizeChange(page_size) {
+            // 切换size
+            this.paginations.page_index = 1;
+            this.paginations.page_size = page_size;
+            this.tableData = this.allTableData.filter((item, index) => {
+                return index < page_size;
+            });
         }
     },
     components: {
@@ -103,5 +187,8 @@ export default {
 }
 .btnRight {
   float: right;
+}
+.pagination {
+    text-align: right;
 }
 </style>

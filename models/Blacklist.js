@@ -7,8 +7,8 @@ const BlacklistSchema = new Schema({
         required: true
     },
     reason: {
-        type: Number,
-        default: 0//0为系统拉黑，1位手动拉黑
+        type: String,
+        default: "系统拉黑"
     },
     date: {
         type: Date,

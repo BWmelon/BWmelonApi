@@ -3,6 +3,9 @@ const router = express.Router();
 const passport = require("passport");
 const Blacklist = require("../../models/Blacklist");
 
+
+
+
 // 添加黑名单域名
 router.post("/add", passport.authenticate("jwt", {session:false}), (req,res)=>{
     const blacklistFields = {};
