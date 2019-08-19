@@ -8,6 +8,9 @@ const passport = require("passport");
 const path = require('path');
 const fs = require('fs');
 const https = require('https');
+const RateLimit = require('express-rate-limit');
+
+
 
 // 跨域
 app.use(cors());
@@ -38,12 +41,28 @@ app.use("/api/statistic", statistic);
 app.use(passport.initialize());
 require("./config/passport")(passport);
 
-
+// 后台登陆
 const users = require("./routes/api/users");
 app.use("/api/users", users);
 
+// 域名黑名单
 const blacklists = require("./routes/api/blacklists");
 app.use("/api/blacklists", blacklists);
+
+// 请求频率限制
+var apiLimiter = new RateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 1000, // 1000 次
+    delayMs: 0, // disabled 延迟响应
+    handler: function (req, res) {
+        res.status(429).json({
+            msg: "请求频率过快，当前频率为每小时一千次"
+        })
+    }
+})
+app.use(apiLimiter);
+
+
 
 const tinyurl = require("./routes/api/tinyurl");
 const longurl = require("./routes/api/longurl");
@@ -66,6 +85,9 @@ app.use("/api/icp", icp);
 app.use("/api/onenote", onenote);
 app.use("/api/cloudmusic", cloudmusic);
 app.use("/api/bing", bing);
+
+
+
 
 
 

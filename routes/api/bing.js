@@ -4,6 +4,7 @@ const request = require("request");
 const Core = require("../../core/function");
 const core = new Core();
 
+
 router.get("/:day", (req, res) => {
     if (!req.params.day) {
         res.json({
