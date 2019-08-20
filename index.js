@@ -3,7 +3,6 @@ const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const passport = require("passport");
 
 const path = require('path');
 const fs = require('fs');
@@ -37,18 +36,6 @@ mongoose.connect(db, {useNewUrlParser: true})
 const statistic = require("./routes/api/statistic");
 app.use("/api/statistic", statistic);
 
-// passport初始化
-app.use(passport.initialize());
-require("./config/passport")(passport);
-
-// 后台登陆
-const users = require("./routes/api/users");
-app.use("/api/users", users);
-
-// 域名黑名单
-const blacklists = require("./routes/api/blacklists");
-app.use("/api/blacklists", blacklists);
-
 // 请求频率限制
 var apiLimiter = new RateLimit({
     windowMs: 60 * 60 * 1000, // 1 hour
@@ -61,8 +48,6 @@ var apiLimiter = new RateLimit({
     }
 })
 app.use(apiLimiter);
-
-
 
 const tinyurl = require("./routes/api/tinyurl");
 const longurl = require("./routes/api/longurl");
@@ -85,10 +70,6 @@ app.use("/api/icp", icp);
 app.use("/api/onenote", onenote);
 app.use("/api/cloudmusic", cloudmusic);
 app.use("/api/bing", bing);
-
-
-
-
 
 
 

@@ -4,7 +4,6 @@ const request = require("request");
 const Core = require("../../core/function");
 const core = new Core();
 
-
 router.get("/:day", (req, res) => {
     if (!req.params.day) {
         res.json({
@@ -16,7 +15,7 @@ router.get("/:day", (req, res) => {
             status: 4,
             msg: "壁纸日期应为0-8"
         })
-    } else {      
+    } else {
         bing(req.params.day)
             .then(req => {
                 res.json({
@@ -44,7 +43,7 @@ function bing(day) {
         };
         request(opts, function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                if (day >= 0 && day <=7) {
+                if (day >= 0 && day <= 7) {
                     let ret = JSON.parse(body)
                     let url = "http://s.cn.bing.net" + ret.images[0].url;
                     let copyright = ret.images[0].copyright;
