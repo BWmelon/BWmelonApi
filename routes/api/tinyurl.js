@@ -77,10 +77,10 @@ function urlcn(url) {
 };
 
 function tcn(url) {
-    //原api https://api.weibo.com/2/short_url/shorten.json?source=2849184197&url_long=
+    //原api https://api.t.sina.com.cn/short_url/shorten.json?source=2849184197&url_long=
     return new Promise((resolve, reject) => {
         let option = {
-            url: "https://api.weibo.com/2/short_url/shorten.json?source=2849184197&url_long=" + url,
+            url: "https://api.t.sina.com.cn/short_url/shorten.json?source=2849184197&url_long=" + url,
             method: "GET",
             json: true,
             headers: {
@@ -89,7 +89,7 @@ function tcn(url) {
         };
         request(option, function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                tinyurl = body.urls[0].url_short;
+                tinyurl = body[0].url_short;
                 tinyurl = tinyurl.replace(/http/, "https");
                 resolve(tinyurl);
             }
