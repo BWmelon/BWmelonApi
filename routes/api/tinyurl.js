@@ -46,7 +46,7 @@ router.get("/tcn", (req, res) => {
             .catch((err) => {
                 res.json({
                     status: 3,
-                    msg: "短网址生成失败"
+                    msg: "短网址生成失败(新浪短网址现已失效)"
                 });
             })
     }
@@ -54,11 +54,13 @@ router.get("/tcn", (req, res) => {
 });
 
 function urlcn(url) {
-    //原api http://sa.sogou.com/gettiny?url=
+    //原api http://sa.sogou.com/gettiny?url= (已失效)
+    //原api http://dwz.fxw.la/url/url.php?
+
     return new Promise((resolve, reject) => {
 
         let opts = {
-            url: "https://sa.sogou.com/gettiny?url=" + url,
+            url: "http://dwz.fxw.la/url/url.php?" + url,
             method: "GET",
             headers: {
                 "content-type": "text/plain",
@@ -66,7 +68,9 @@ function urlcn(url) {
         };
         request(opts, function (error, response, body) {
             if (!error && response.statusCode == 200) {
-                let tinyurl = body;
+                let tinyurl = JSON.parse(body);
+                tinyurl = tinyurl['url_short'];
+                tinyurl = tinyurl.replace(/http/, "https");      
                 resolve(tinyurl);
             } else {
                 reject(error);
